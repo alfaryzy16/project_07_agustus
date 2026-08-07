@@ -5,7 +5,7 @@ services:
     container_name: project07-nginx
 
     ports:
-      - "8080:80"
+      - "1000:80"
 
     volumes:
       - ./src:/var/www/html
