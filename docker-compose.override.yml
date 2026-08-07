@@ -1,0 +1,16 @@
+services:
+  nginx:
+    ports:
+      - "8080:80"
+
+  phpmyadmin:
+    ports:
+      - "8081:80"
+
+  pgadmin:
+    ports:
+      - "8082:80"
+
+  mailpit:
+    ports:
+      - "8025:8025"

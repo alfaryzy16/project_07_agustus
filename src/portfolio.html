@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Helmy Alfarizy - Portfolio</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome untuk Ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .hero-bg { background-color: #0a1128; }
+        .text-brand { color: #3b82f6; }
+        .bg-brand { background-color: #3b82f6; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased">
+
+    <!-- Navbar -->
+    <nav class="hero-bg text-white fixed w-full z-50 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center gap-2">
+                    <span class="text-2xl font-bold text-brand">HA</span>
+                    <span class="font-semibold tracking-wide">HELMY ALFARIZY</span>
+                </div>
+                <div class="hidden md:flex space-x-6 text-sm font-medium">
+                    <a href="#" class="text-brand border-b-2 border-brand pb-1">Beranda</a>
+                    <a href="#" class="hover:text-brand transition">Tentang Saya</a>
+                    <a href="#" class="hover:text-brand transition">Pengalaman</a>
+                    <a href="#" class="hover:text-brand transition">Portfolio</a>
+                    <a href="#" class="hover:text-brand transition">Skills</a>
+                    <a href="#" class="hover:text-brand transition">Sertifikasi</a>
+                    <a href="#" class="hover:text-brand transition">Kontak</a>
+                </div>
+                <div class="hidden md:flex items-center space-x-4">
+                    <button class="bg-brand hover:bg-blue-600 text-white px-4 py-2 rounded text-sm font-medium transition flex items-center gap-2">
+                        <i class="fa-solid fa-download"></i> Download CV
+                    </button>
+                    <button class="text-gray-300 hover:text-white">
+                        <i class="fa-solid fa-moon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-bg text-white pt-28 pb-32 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col md:flex-row items-center">
+            <div class="md:w-3/5 space-y-6">
+                <p class="text-lg font-medium">Halo, saya 👋</p>
+                <h1 class="text-5xl md:text-7xl font-bold tracking-tight">
+                    HELMY <span class="text-brand">ALFARIZY</span>
+                </h1>
+                <h2 class="text-xl md:text-2xl font-semibold text-gray-300">
+                    Human Resources • Operational Development • IT Development
+                </h2>
+                <p class="text-gray-400 max-w-xl leading-relaxed">
+                    Profesional dengan lebih dari 5 tahun pengalaman di bidang Human Resources, 
+                    Administrasi, Sistem Informasi, dan Operational Development.<br>
+                    Berpengalaman dalam membangun sistem, menyusun SOP, analisis data, 
+                    hingga pengembangan SDM untuk mendukung kinerja organisasi secara optimal.
+                </p>
+                <div class="flex gap-4 pt-4">
+                    <button class="bg-brand hover:bg-blue-600 text-white px-6 py-3 rounded font-medium transition flex items-center gap-2">
+                        Lihat Portfolio <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                    <button class="border border-gray-400 hover:border-white text-white px-6 py-3 rounded font-medium transition flex items-center gap-2">
+                        <i class="fa-solid fa-link"></i> Hubungi Saya
+                    </button>
+                </div>
+            </div>
+            <div class="md:w-2/5 mt-10 md:mt-0 flex justify-center relative">
+                <!-- Ganti src dengan foto asli kamu -->
+                <img src="https://via.placeholder.com/400x500/1e293b/ffffff?text=Foto+Helmy" alt="Helmy Alfarizy" class="rounded-b-full object-cover shadow-2xl z-10 w-80 h-[28rem]">
+                <div class="absolute w-80 h-80 bg-blue-900 rounded-full blur-3xl opacity-50 -z-10 top-10"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Stats Section -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-16 relative z-20">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex items-center gap-4">
+                <div class="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center text-slate-700 text-xl"><i class="fa-solid fa-briefcase"></i></div>
+                <div>
+                    <h3 class="text-2xl font-bold">5+</h3>
+                    <p class="text-xs text-gray-500 uppercase font-semibold">Tahun Pengalaman</p>
+                </div>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex items-center gap-4">
+                <div class="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center text-slate-700 text-xl"><i class="fa-solid fa-building"></i></div>
+                <div>
+                    <h3 class="text-2xl font-bold">20+</h3>
+                    <p class="text-xs text-gray-500 uppercase font-semibold">Proyek & Inisiatif</p>
+                </div>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex items-center gap-4">
+                <div class="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center text-slate-700 text-xl"><i class="fa-solid fa-users"></i></div>
+                <div>
+                    <h3 class="text-2xl font-bold">100+</h3>
+                    <p class="text-xs text-gray-500 uppercase font-semibold">Karyawan Terlibat</p>
+                </div>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex items-center gap-4">
+                <div class="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center text-slate-700 text-xl"><i class="fa-solid fa-chart-line"></i></div>
+                <div>
+                    <h3 class="text-2xl font-bold">95%</h3>
+                    <p class="text-xs text-gray-500 uppercase font-semibold">Komitmen Hasil</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About & Experience -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+            
+            <!-- Tentang Saya -->
+            <div>
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-3 h-3 rounded-full bg-brand"></div>
+                    <h2 class="text-2xl font-bold">Tentang Saya</h2>
+                </div>
+                <p class="text-gray-600 mb-4 leading-relaxed">
+                    Saya merupakan profesional yang memiliki pengalaman dalam mengelola Human Resources, mengembangkan sistem informasi, serta meningkatkan efisiensi operasional perusahaan.
+                </p>
+                <p class="text-gray-600 mb-8 leading-relaxed">
+                    Saya percaya bahwa kombinasi antara manusia, proses, dan teknologi adalah kunci utama untuk mencapai kinerja organisasi yang berkelanjutan.
+                </p>
+                <ul class="space-y-4 mb-8 text-sm font-medium text-slate-700">
+                    <li class="flex items-center gap-3"><i class="fa-solid fa-user-tie text-brand text-lg w-5"></i> HR Development & Recruitment</li>
+                    <li class="flex items-center gap-3"><i class="fa-solid fa-file-alt text-brand text-lg w-5"></i> SOP & Operational Development</li>
+                    <li class="flex items-center gap-3"><i class="fa-solid fa-chart-pie text-brand text-lg w-5"></i> Data Analysis & Dashboard</li>
+                    <li class="flex items-center gap-3"><i class="fa-brands fa-google text-brand text-lg w-5"></i> Google Workspace & Automation</li>
+                    <li class="flex items-center gap-3"><i class="fa-solid fa-tasks text-brand text-lg w-5"></i> Project Coordination</li>
+                </ul>
+                <button class="border border-brand text-brand hover:bg-blue-50 px-5 py-2 rounded text-sm font-medium transition flex items-center gap-2">
+                    <i class="fa-regular fa-user"></i> Selengkapnya Tentang Saya
+                </button>
+            </div>
+
+            <!-- Pengalaman -->
+            <div>
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-3 h-3 rounded-full bg-brand"></div>
+                    <h2 class="text-2xl font-bold">Pengalaman</h2>
+                </div>
+                <div class="relative border-l-2 border-gray-200 ml-3 space-y-8 pb-4">
+                    <!-- Exp 1 -->
+                    <div class="relative pl-6">
+                        <div class="absolute w-3 h-3 bg-brand rounded-full -left-[7px] top-1.5 ring-4 ring-white"></div>
+                        <span class="text-xs font-semibold text-gray-500">2024 - Sekarang</span>
+                        <h4 class="font-bold text-slate-800 mt-1">Human Resources Development Officer</h4>
+                        <p class="text-sm font-medium text-slate-600">PT. Muhyi Bazana Putra (Distributor) - Depok</p>
+                        <p class="text-sm text-gray-500 mt-2">Membangun sistem tracking performa, rekrutmen online, penyusunan SOP, pemetaan rute distribusi, analisis data sebelum implementasi strategi.</p>
+                    </div>
+                    <!-- Exp 2 -->
+                    <div class="relative pl-6">
+                        <div class="absolute w-3 h-3 bg-gray-300 rounded-full -left-[7px] top-1.5 ring-4 ring-white"></div>
+                        <span class="text-xs font-semibold text-gray-500">Sep 2024 - Des 2024</span>
+                        <h4 class="font-bold text-slate-800 mt-1">Staff Perencanaan, Pelaporan & Sistem Informasi</h4>
+                        <p class="text-sm font-medium text-slate-600">Universitas Ibn Khaldun Bogor</p>
+                        <p class="text-sm text-gray-500 mt-2">Laporan kinerja, pengelolaan data, dan pengembangan sistem informasi untuk mendukung pengambilan keputusan.</p>
+                    </div>
+                    <!-- Exp 3 -->
+                    <div class="relative pl-6">
+                        <div class="absolute w-3 h-3 bg-gray-300 rounded-full -left-[7px] top-1.5 ring-4 ring-white"></div>
+                        <span class="text-xs font-semibold text-gray-500">2021 - 2024</span>
+                        <h4 class="font-bold text-slate-800 mt-1">Laboran, Staff IT & Staff Penjaminan Mutu</h4>
+                        <p class="text-sm font-medium text-slate-600">Universitas Ibn Khaldun Bogor</p>
+                        <p class="text-sm text-gray-500 mt-2">Menangani berbagai peran dalam pengelolaan laboratorium, IT support, dan penjaminan mutu. Terlibat dalam audit ISO 21001:2018 dan 5 proses akreditasi dengan hasil "Baik Sekali".</p>
+                    </div>
+                </div>
+                <button class="border border-brand text-brand hover:bg-blue-50 px-5 py-2 rounded text-sm font-medium transition flex items-center gap-2 mt-4 ml-2">
+                    <i class="fa-solid fa-briefcase"></i> Lihat Semua Pengalaman
+                </button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="bg-white py-16 border-t border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center gap-3 mb-8">
+                <div class="w-3 h-3 rounded-full bg-brand"></div>
+                <h2 class="text-2xl font-bold">Portfolio Terpilih</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Card 1 -->
+                <div class="border border-gray-100 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition">
+                    <div class="h-40 bg-gray-200 relative">
+                        <img src="https://via.placeholder.com/300x200/e2e8f0/64748b?text=Dashboard+Img" class="w-full h-full object-cover" alt="Dashboard">
+                        <span class="absolute bottom-2 left-2 bg-blue-100 text-blue-800 text-xs font-semibold px-2 py-1 rounded">Dashboard</span>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-bold text-slate-800 text-sm mb-2 leading-tight">Sistem Tracking Performa Sales, MD & Driver</h4>
+                        <p class="text-xs text-gray-500 mb-4 line-clamp-3">Aplikasi berbasis Google Sheets untuk tracking performa harian dan bulanan secara real-time.</p>
+                        <a href="#" class="text-brand text-xs font-semibold hover:underline">Lihat Detail &rarr;</a>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div class="border border-gray-100 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition">
+                    <div class="h-40 bg-gray-200 relative">
+                        <img src="https://via.placeholder.com/300x200/e2e8f0/64748b?text=Mapping+Img" class="w-full h-full object-cover" alt="Mapping">
+                        <span class="absolute bottom-2 left-2 bg-blue-100 text-blue-800 text-xs font-semibold px-2 py-1 rounded">Mapping</span>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-bold text-slate-800 text-sm mb-2 leading-tight">Pemetaan Rute Distribusi 100+ Toko</h4>
+                        <p class="text-xs text-gray-500 mb-4 line-clamp-3">Pemetaan rute distribusi untuk meningkatkan efisiensi waktu dan biaya operasional.</p>
+                        <a href="#" class="text-brand text-xs font-semibold hover:underline">Lihat Detail &rarr;</a>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div class="border border-gray-100 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition">
+                    <div class="h-40 bg-gray-200 relative">
+                        <img src="https://via.placeholder.com/300x200/e2e8f0/64748b?text=Recruitment+Img" class="w-full h-full object-cover" alt="Recruitment">
+                        <span class="absolute bottom-2 left-2 bg-blue-100 text-blue-800 text-xs font-semibold px-2 py-1 rounded">Recruitment</span>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-bold text-slate-800 text-sm mb-2 leading-tight">Sistem Rekrutmen Online</h4>
+                        <p class="text-xs text-gray-500 mb-4 line-clamp-3">Sistem rekrutmen online mulai dari pengisian form, seleksi hingga penilaian kandidat.</p>
+                        <a href="#" class="text-brand text-xs font-semibold hover:underline">Lihat Detail &rarr;</a>
+                    </div>
+                </div>
+                <!-- Card 4 (SOP & Analysis Data merged representation) -->
+                <div class="border border-gray-100 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition">
+                    <div class="h-40 bg-gray-200 relative">
+                        <img src="https://via.placeholder.com/300x200/e2e8f0/64748b?text=Analysis+Img" class="w-full h-full object-cover" alt="Analysis">
+                        <span class="absolute bottom-2 left-2 bg-blue-100 text-blue-800 text-xs font-semibold px-2 py-1 rounded">Analysis</span>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-bold text-slate-800 text-sm mb-2 leading-tight">Analisis Data & Dashboard Kinerja</h4>
+                        <p class="text-xs text-gray-500 mb-4 line-clamp-3">Menyajikan data kinerja dalam bentuk dashboard untuk pengambilan keputusan manajemen.</p>
+                        <a href="#" class="text-brand text-xs font-semibold hover:underline">Lihat Detail &rarr;</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex justify-center mt-8">
+                <button class="border border-brand text-brand hover:bg-blue-50 px-5 py-2 rounded text-sm font-medium transition flex items-center gap-2">
+                    <i class="fa-solid fa-border-all"></i> Lihat Semua Portfolio
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bottom Section: Skills, Certs, Contact -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+            
+            <!-- Skills & Tools -->
+            <div>
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-3 h-3 rounded-full bg-brand"></div>
+                    <h2 class="text-xl font-bold">Skills & Tools</h2>
+                </div>
+                <div class="space-y-4">
+                    <!-- Skill Item -->
+                    <div class="flex items-center text-xs font-medium">
+                        <span class="w-32 truncate">Human Resources</span>
+                        <div class="flex-1 mx-3 h-1.5 bg-gray-200 rounded-full overflow-hidden">
+                            <div class="bg-brand h-full rounded-full" style="width: 95%"></div>
+                        </div>
+                        <span class="w-8 text-right text-brand">95%</span>
+                    </div>
+                    <div class="flex items-center text-xs font-medium">
+                        <span class="w-32 truncate">Google Workspace</span>
+                        <div class="flex-1 mx-3 h-1.5 bg-gray-200 rounded-full overflow-hidden">
+                            <div class="bg-brand h-full rounded-full" style="width: 95%"></div>
+                        </div>
+                        <span class="w-8 text-right text-brand">95%</span>
+                    </div>
+                    <div class="flex items-center text-xs font-medium">
+                        <span class="w-32 truncate">Microsoft Office</span>
+                        <div class="flex-1 mx-3 h-1.5 bg-gray-200 rounded-full overflow-hidden">
+                            <div class="bg-brand h-full rounded-full" style="width: 98%"></div>
+                        </div>
+                        <span class="w-8 text-right text-brand">98%</span>
+                    </div>
+                    <div class="flex items-center text-xs font-medium">
+                        <span class="w-32 truncate">Data Analysis</span>
+                        <div class="flex-1 mx-3 h-1.5 bg-gray-200 rounded-full overflow-hidden">
+                            <div class="bg-brand h-full rounded-full" style="width: 90%"></div>
+                        </div>
+                        <span class="w-8 text-right text-brand">90%</span>
+                    </div>
+                    <div class="flex items-center text-xs font-medium">
+                        <span class="w-32 truncate">Apps Script</span>
+                        <div class="flex-1 mx-3 h-1.5 bg-gray-200 rounded-full overflow-hidden">
+                            <div class="bg-brand h-full rounded-full" style="width: 85%"></div>
+                        </div>
+                        <span class="w-8 text-right text-brand">85%</span>
+                    </div>
+                    <div class="flex items-center text-xs font-medium">
+                        <span class="w-32 truncate">Project Management</span>
+                        <div class="flex-1 mx-3 h-1.5 bg-gray-200 rounded-full overflow-hidden">
+                            <div class="bg-brand h-full rounded-full" style="width: 88%"></div>
+                        </div>
+                        <span class="w-8 text-right text-brand">88%</span>
+                    </div>
+                    <div class="flex items-center text-xs font-medium">
+                        <span class="w-32 truncate">Communication</span>
+                        <div class="flex-1 mx-3 h-1.5 bg-gray-200 rounded-full overflow-hidden">
+                            <div class="bg-brand h-full rounded-full" style="width: 92%"></div>
+                        </div>
+                        <span class="w-8 text-right text-brand">92%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sertifikasi & Pelatihan -->
+            <div>
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-3 h-3 rounded-full bg-brand"></div>
+                    <h2 class="text-xl font-bold">Sertifikasi & Pelatihan</h2>
+                </div>
+                <div class="space-y-5 text-sm">
+                    <div class="flex items-start justify-between">
+                        <div class="flex gap-3 items-center">
+                            <i class="fa-solid fa-award text-slate-700 text-lg w-5"></i>
+                            <span class="font-medium text-slate-800 leading-tight max-w-[200px]">Certified Training in Artificial Intelligence on Online Marketing - UIS Malaysia</span>
+                        </div>
+                        <span class="text-gray-500 text-xs">2026</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div class="flex gap-3 items-center">
+                            <i class="fa-solid fa-certificate text-green-600 text-lg w-5"></i>
+                            <span class="font-medium text-slate-800">Audit Internal ISO 21001:2018</span>
+                        </div>
+                        <span class="text-gray-500 text-xs">2024</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div class="flex gap-3 items-center">
+                            <i class="fa-solid fa-id-card text-blue-400 text-lg w-5"></i>
+                            <span class="font-medium text-slate-800">Pelatihan SmartPLS</span>
+                        </div>
+                        <span class="text-gray-500 text-xs">2024</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div class="flex gap-3 items-center">
+                            <i class="fa-solid fa-medal text-orange-400 text-lg w-5"></i>
+                            <span class="font-medium text-slate-800">Pelatihan Administrasi & Perpajakan</span>
+                        </div>
+                        <span class="text-gray-500 text-xs">2023</span>
+                    </div>
+                </div>
+                <div class="mt-6 flex justify-center md:justify-start">
+                    <button class="border border-brand text-brand hover:bg-blue-50 px-4 py-1.5 rounded text-xs font-medium transition flex items-center gap-2">
+                        <i class="fa-solid fa-ribbon"></i> Lihat Semua Sertifikasi
+                    </button>
+                </div>
+            </div>
+
+            <!-- Hubungi Saya -->
+            <div>
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-3 h-3 rounded-full bg-brand"></div>
+                    <h2 class="text-xl font-bold">Hubungi Saya</h2>
+                </div>
+                <div class="space-y-4 text-sm font-medium text-slate-700">
+                    <div class="flex items-center gap-4">
+                        <i class="fa-solid fa-location-dot text-brand w-4 text-center"></i>
+                        <span>Bogor, Indonesia</span>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <i class="fa-regular fa-envelope text-brand w-4 text-center"></i>
+                        <span>helmyalfarizy@gmail.com</span>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <i class="fa-solid fa-phone text-brand w-4 text-center"></i>
+                        <span>+62 895 4016 05848</span>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <i class="fa-brands fa-linkedin text-brand w-4 text-center"></i>
+                        <span>linkedin.com/in/helmyalfarizy</span>
+                    </div>
+                </div>
+                <div class="flex gap-4 mt-6">
+                    <a href="#" class="w-10 h-10 bg-brand text-white rounded-lg flex items-center justify-center text-xl hover:bg-blue-700 transition">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-green-500 text-white rounded-lg flex items-center justify-center text-xl hover:bg-green-600 transition">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-slate-800 text-white rounded-lg flex items-center justify-center text-xl hover:bg-black transition">
+                        <i class="fa-regular fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="hero-bg text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-4">
+                <span class="text-3xl font-bold text-brand">HA</span>
+                <div>
+                    <h4 class="font-bold tracking-wide">HELMY ALFARIZY</h4>
+                    <p class="text-xs text-gray-400">Human Resources, Operational Development<br>& IT Development</p>
+                </div>
+            </div>
+            <div class="text-sm text-gray-400 text-center">
+                © 2026 Helmy Alfarizy. All rights reserved.
+            </div>
+            <div class="flex items-center gap-4 text-sm text-gray-400">
+                <span>Built with <span class="text-red-500">❤️</span> using Next.js</span>
+                <button class="bg-white text-slate-900 w-8 h-8 rounded-full flex items-center justify-center hover:bg-gray-200 transition">
+                    <i class="fa-solid fa-arrow-up"></i>
+                </button>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
