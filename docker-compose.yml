@@ -1,28 +1,209 @@
 services:
 
+  #################################################
+  # NGINX
+  #################################################
+
   nginx:
     image: nginx:alpine
-    container_name: project07-nginx
+    container_name: ${PROJECT_NAME}-nginx
+    restart: unless-stopped
 
-    ports:
-      - "1000:80"
+    expose:
+      - "80"
 
     volumes:
       - ./src:/var/www/html
-      - ./docker/nginx/conf.d:/etc/nginx/conf.d
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d:ro
 
     depends_on:
-      - php
+      - php84
 
     networks:
       - app
 
-  php:
+  #################################################
+  # PHP 8.4
+  #################################################
+
+  php84:
     build:
       context: .
-      dockerfile: docker/php/Dockerfile
+      dockerfile: docker/php84/Dockerfile
 
-    container_name: project07-php
+    container_name: ${PROJECT_NAME}-php84
+
+    restart: unless-stopped
+
+    volumes:
+      - ./src:/var/www/html
+
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+    networks:
+      - app
+
+  #################################################
+  # MYSQL
+  #################################################
+
+  mysql:
+    image: mysql:8.0
+
+    container_name: ${PROJECT_NAME}-mysql
+
+    restart: unless-stopped
+
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+    healthcheck:
+      test: ["CMD","mysqladmin","ping","-h","localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+    networks:
+      - app
+
+  #################################################
+  # REDIS
+  #################################################
+
+  redis:
+    image: redis:7-alpine
+
+    container_name: ${PROJECT_NAME}-redis
+
+    restart: unless-stopped
+
+    expose:
+      - "6379"
+
+    healthcheck:
+      test: ["CMD","redis-cli","ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+    networks:
+      - app
+
+  #################################################
+  # PHPMYADMIN
+  #################################################
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+
+    container_name: ${PROJECT_NAME}-phpmyadmin
+
+    restart: unless-stopped
+
+    expose:
+      - "80"
+
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+
+    networks:
+      - app
+
+  #################################################
+  # POSTGRESQL
+  #################################################
+
+  postgres:
+    image: postgres:16-alpine
+
+    container_name: ${PROJECT_NAME}-postgres
+
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+    healthcheck:
+      test: ["CMD-SHELL","pg_isready -U ${POSTGRES_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+    networks:
+      - app
+
+  #################################################
+  # PGADMIN
+  #################################################
+
+  pgadmin:
+    image: dpage/pgadmin4
+
+    container_name: ${PROJECT_NAME}-pgadmin
+
+    restart: unless-stopped
+
+    expose:
+      - "80"
+
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+
+    networks:
+      - app
+
+  #################################################
+  # MAILPIT
+  #################################################
+
+  mailpit:
+    image: axllent/mailpit
+
+    container_name: ${PROJECT_NAME}-mailpit
+
+    restart: unless-stopped
+
+    expose:
+      - "8025"
+
+    networks:
+      - app
+
+  #################################################
+  # PHP 7.4
+  #################################################
+
+  php74:
+    build:
+      context: .
+      dockerfile: docker/php74/Dockerfile
+
+    container_name: ${PROJECT_NAME}-php74
+
+    restart: unless-stopped
 
     volumes:
       - ./src:/var/www/html
@@ -30,5 +211,40 @@ services:
     networks:
       - app
 
+  #################################################
+  # LARAVEL
+  #################################################
+
+  laravel:
+    build:
+      context: .
+      dockerfile: docker/laravel/Dockerfile
+
+    container_name: ${PROJECT_NAME}-laravel
+
+    restart: unless-stopped
+
+    volumes:
+      - ./laravel:/var/www/html
+
+    networks:
+      - app
+
+
+#################################################
+# VOLUMES
+#################################################
+
+volumes:
+  mysql-data:
+  postgres-data:
+
+#################################################
+# NETWORKS
+#################################################
+
 networks:
+
   app:
+    driver: bridge
+
