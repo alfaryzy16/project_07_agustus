@@ -1,11 +1,6 @@
 pipeline {
 
-    agent {
-        docker {
-            image 'project07-jenkins:latest'
-            args '-u root'
-        }
-    }
+    agent any
 
     stages {
 
@@ -38,9 +33,13 @@ pipeline {
                 sshagent(credentials: ['vps-ssh-key']) {
                     sh '''
                         echo "=== TEST SSH VPS ==="
-                        ssh -o StrictHostKeyChecking=no root@158.220.108.24 "echo SSH_VPS_OK"
+
+                        ssh -o StrictHostKeyChecking=no \
+                            root@158.220.108.24 \
+                            "echo SSH_VPS_OK"
 
                         echo "=== DEPLOY ANSIBLE ==="
+
                         ansible-playbook \
                         -i ansible/inventory/production.ini \
                         ansible/playbooks/deploy.yml
@@ -62,5 +61,4 @@ pipeline {
         }
 
     }
-
 }
