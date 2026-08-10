@@ -15,12 +15,14 @@ services:
     volumes:
       - ./src:/var/www/html
       - ./docker/nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d:ro
 
     depends_on:
-      - php84
+      - php74
 
     networks:
       - app
+
 
   #################################################
   # PHP 8.4
@@ -32,7 +34,6 @@ services:
       dockerfile: docker/php84/Dockerfile
 
     container_name: ${PROJECT_NAME}-php84
-
     restart: unless-stopped
 
     volumes:
@@ -45,6 +46,7 @@ services:
     networks:
       - app
 
+
   #################################################
   # MYSQL
   #################################################
@@ -53,7 +55,6 @@ services:
     image: mysql:8.0
 
     container_name: ${PROJECT_NAME}-mysql
-
     restart: unless-stopped
 
     environment:
@@ -66,13 +67,14 @@ services:
       - mysql-data:/var/lib/mysql
 
     healthcheck:
-      test: ["CMD","mysqladmin","ping","-h","localhost"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 10s
       timeout: 5s
       retries: 10
 
     networks:
       - app
+
 
   #################################################
   # REDIS
@@ -82,20 +84,20 @@ services:
     image: redis:7-alpine
 
     container_name: ${PROJECT_NAME}-redis
-
     restart: unless-stopped
 
     expose:
       - "6379"
 
     healthcheck:
-      test: ["CMD","redis-cli","ping"]
+      test: ["CMD", "redis-cli", "ping"]
       interval: 10s
       timeout: 5s
       retries: 10
 
     networks:
       - app
+
 
   #################################################
   # PHPMYADMIN
@@ -105,7 +107,6 @@ services:
     image: phpmyadmin:latest
 
     container_name: ${PROJECT_NAME}-phpmyadmin
-
     restart: unless-stopped
 
     expose:
@@ -122,6 +123,7 @@ services:
     networks:
       - app
 
+
   #################################################
   # POSTGRESQL
   #################################################
@@ -130,7 +132,6 @@ services:
     image: postgres:16-alpine
 
     container_name: ${PROJECT_NAME}-postgres
-
     restart: unless-stopped
 
     environment:
@@ -142,13 +143,14 @@ services:
       - postgres-data:/var/lib/postgresql/data
 
     healthcheck:
-      test: ["CMD-SHELL","pg_isready -U ${POSTGRES_USER}"]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
       interval: 10s
       timeout: 5s
       retries: 5
 
     networks:
       - app
+
 
   #################################################
   # PGADMIN
@@ -158,7 +160,6 @@ services:
     image: dpage/pgadmin4
 
     container_name: ${PROJECT_NAME}-pgadmin
-
     restart: unless-stopped
 
     expose:
@@ -175,6 +176,7 @@ services:
     networks:
       - app
 
+
   #################################################
   # MAILPIT
   #################################################
@@ -183,7 +185,6 @@ services:
     image: axllent/mailpit
 
     container_name: ${PROJECT_NAME}-mailpit
-
     restart: unless-stopped
 
     expose:
@@ -191,6 +192,7 @@ services:
 
     networks:
       - app
+
 
   #################################################
   # PHP 7.4
@@ -202,14 +204,15 @@ services:
       dockerfile: docker/php74/Dockerfile
 
     container_name: ${PROJECT_NAME}-php74
-
     restart: unless-stopped
 
     volumes:
       - ./src:/var/www/html
+      - ./laravel:/var/www/laravel
 
     networks:
       - app
+
 
   #################################################
   # LARAVEL
@@ -221,7 +224,6 @@ services:
       dockerfile: docker/laravel/Dockerfile
 
     container_name: ${PROJECT_NAME}-laravel
-
     restart: unless-stopped
 
     volumes:
@@ -239,12 +241,11 @@ volumes:
   mysql-data:
   postgres-data:
 
+
 #################################################
 # NETWORKS
 #################################################
 
 networks:
-
   app:
     driver: bridge
-
