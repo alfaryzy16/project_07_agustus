@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>CI/CD Laravel 7</title>
+</head>
+<body>
+
+    <h1>CI/CD Laravel 7 🚀</h1>
+
+    <h2>Database Test</h2>
+
+    @if ($tests->count())
+        <ul>
+            @foreach ($tests as $test)
+                <li>
+                    {{ $test->message }}
+                    — {{ $test->created_at }}
+                </li>
+            @endforeach
+        </ul>
+    @else
+        <p>Belum ada data.</p>
+    @endif
+
+</body>
+</html>
