@@ -1,11 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\CicdTest;
 
 Route::get('/', function () {
-    return '
-        <h1>CI/CD Laravel 7 Berhasil 🚀</h1>
-        <p>Version: 2.0</p>
-        <p>Auto Deploy Test Berhasil</p>
-    ';
+    $tests = CicdTest::all();
+
+    return view('cicd', compact('tests'));
 });
