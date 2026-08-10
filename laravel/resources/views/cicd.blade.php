@@ -6,7 +6,7 @@
 </head>
 <body>
 
-    <h1>Hello Project 07 🚀🚀 🚀🚀</h1>
+    <h1>Berhasilllllll</h1>
 
     <h2>Database Test</h2>
 
