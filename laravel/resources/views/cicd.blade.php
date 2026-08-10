@@ -6,7 +6,7 @@
 </head>
 <body>
 
-    <h1>CI/CD Laravel 8 + Ansible🚀</h1>
+    <h1>Hello Project 07 - CI/CD Jenkins 🚀🚀</h1>
 
     <h2>Database Test</h2>
 
