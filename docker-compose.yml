@@ -198,20 +198,25 @@ services:
   # PHP 7.4
   #################################################
 
-  php74:
-    build:
-      context: .
-      dockerfile: docker/php74/Dockerfile
+php74:
+  build:
+    context: .
+    dockerfile: docker/php74/Dockerfile
 
-    container_name: ${PROJECT_NAME}-php74
-    restart: unless-stopped
+  container_name: ${PROJECT_NAME}-php74
 
-    volumes:
-      - ./src:/var/www/html
-      - ./laravel:/var/www/laravel
+  restart: unless-stopped
 
-    networks:
-      - app
+  volumes:
+    - ./src:/var/www/html
+    - ./laravel:/var/www/laravel
+
+  depends_on:
+    mysql:
+      condition: service_healthy
+
+  networks:
+    - app
 
 
   #################################################
