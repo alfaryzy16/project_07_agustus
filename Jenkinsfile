@@ -1,6 +1,11 @@
 pipeline {
 
-    agent any
+    agent {
+        docker {
+            image 'project07-jenkins:latest'
+            args '-u root'
+        }
+    }
 
     stages {
 
@@ -28,23 +33,26 @@ pipeline {
             }
         }
 
-stage('Deploy to VPS') {
-    steps {
-        sshagent(credentials: ['vps-ssh-key']) {
-            sh '''
-                echo "=== TEST SSH VPS ==="
-                ssh -o StrictHostKeyChecking=no root@158.220.108.24 "echo SSH_VPS_OK"
+        stage('Deploy to VPS') {
+            steps {
+                sshagent(credentials: ['vps-ssh-key']) {
+                    sh '''
+                        echo "=== TEST SSH VPS ==="
+                        ssh -o StrictHostKeyChecking=no root@158.220.108.24 "echo SSH_VPS_OK"
 
-                echo "=== DEPLOY ANSIBLE ==="
-                ansible-playbook \
-                -i ansible/inventory/production.ini \
-                ansible/playbooks/deploy.yml
-            '''
+                        echo "=== DEPLOY ANSIBLE ==="
+                        ansible-playbook \
+                        -i ansible/inventory/production.ini \
+                        ansible/playbooks/deploy.yml
+                    '''
+                }
+            }
         }
+
     }
-}
 
     post {
+
         success {
             echo 'DEPLOYMENT BERHASIL 🚀'
         }
@@ -52,5 +60,7 @@ stage('Deploy to VPS') {
         failure {
             echo 'DEPLOYMENT GAGAL ❌'
         }
+
     }
+
 }
