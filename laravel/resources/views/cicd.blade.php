@@ -2,11 +2,11 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>CI/CD Laravel 7</title>
+    <title>CI/CD Laravel 8</title>
 </head>
 <body>
 
-    <h1>CI/CD Laravel 7 🚀</h1>
+    <h1>CI/CD Laravel 8 🚀</h1>
 
     <h2>Database Test</h2>
 
