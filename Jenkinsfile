@@ -1,11 +1,6 @@
 pipeline {
 
-    agent {
-        docker {
-            image 'project07-jenkins:latest'
-            args '-u root'
-        }
-    }
+    agent any
 
     stages {
 
