@@ -7,17 +7,14 @@ on:
 
 jobs:
   deploy:
-
     runs-on: ubuntu-latest
 
     steps:
-
       - name: Checkout Repository
         uses: actions/checkout@v4
 
       - name: Deploy to VPS
         uses: appleboy/ssh-action@v1.2.0
-
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
@@ -26,7 +23,199 @@ jobs:
           script: |
             cd /var/www/html/project_07_agustus
 
-            git pull origin main
+            echo "========================================="
+            echo "=== UPDATE SOURCE CODE ==="
+            echo "========================================="
 
-            docker compose down 
+            git fetch origin
+            git reset --hard origin/main
+
+            echo "========================================="
+            echo "=== CREATE PRODUCTION ENVIRONMENT ==="
+            echo "========================================="
+
+            cat > laravel/.env <<EOF
+            APP_NAME=Laravel
+            APP_ENV=production
+            APP_KEY=${{ secrets.APP_KEY }}
+            APP_DEBUG=false
+            APP_URL=http://158.220.108.24:8080
+
+            LOG_CHANNEL=stack
+
+            DB_CONNECTION=mysql
+            DB_HOST=${{ secrets.DB_HOST }}
+            DB_PORT=3306
+            DB_DATABASE=${{ secrets.DB_DATABASE }}
+            DB_USERNAME=${{ secrets.DB_USERNAME }}
+            DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+
+            BROADCAST_DRIVER=log
+            CACHE_DRIVER=file
+            QUEUE_CONNECTION=sync
+            SESSION_DRIVER=file
+            EOF
+
+            echo "========================================="
+            echo "=== DOCKER COMPOSE DOWN ==="
+            echo "========================================="
+
+            docker compose down --remove-orphans
+
+            echo "========================================="
+            echo "=== DOCKER COMPOSE BUILD & START ==="
+            echo "========================================="
+
             docker compose up -d --build
+
+            echo "========================================="
+            echo "=== CONTAINER STATUS ==="
+            echo "========================================="
+
+            docker compose ps
+
+            echo "========================================="
+            echo "=== LARAVEL DB CONFIGURATION ==="
+            echo "========================================="
+
+            docker exec project07-php74 sh -c \
+              'grep "^DB_" /var/www/laravel/.env | sed "s/DB_PASSWORD=.*/DB_PASSWORD=***/"'
+
+            echo "========================================="
+            echo "=== CHECK MYSQL DNS ==="
+            echo "========================================="
+
+            docker exec project07-php74 getent hosts mysql
+
+            echo "========================================="
+            echo "=== WAIT FOR MYSQL ==="
+            echo "========================================="
+
+            MYSQL_READY=false
+
+            for i in $(seq 1 30); do
+
+              if docker exec project07-php74 php -r '
+              $fp = @fsockopen("mysql", 3306, $errno, $errstr, 2);
+              if ($fp) {
+                  fclose($fp);
+                  exit(0);
+              }
+              exit(1);
+              '; then
+
+                echo "MYSQL IS READY"
+                MYSQL_READY=true
+                break
+
+              fi
+
+              echo "Waiting for MySQL... attempt $i/30"
+              sleep 2
+
+            done
+
+            if [ "$MYSQL_READY" != "true" ]; then
+              echo "MYSQL CONNECTION FAILED"
+
+              docker compose ps
+
+              docker compose logs mysql --tail=100
+
+              exit 1
+            fi
+
+            echo "========================================="
+            echo "=== MYSQL PORT TEST ==="
+            echo "========================================="
+
+            docker exec project07-php74 php -r '
+            $fp = @fsockopen("mysql", 3306, $errno, $errstr, 5);
+
+            if (!$fp) {
+                echo "MYSQL PORT FAILED: $errstr ($errno)\n";
+                exit(1);
+            }
+
+            echo "MYSQL PORT OK\n";
+
+            fclose($fp);
+            '
+
+            echo "========================================="
+            echo "=== COMPOSER INSTALL ==="
+            echo "========================================="
+
+            docker exec project07-php74 composer install \
+              --working-dir=/var/www/laravel \
+              --no-interaction \
+              --prefer-dist \
+              --optimize-autoloader
+
+            echo "========================================="
+            echo "=== LARAVEL PERMISSIONS ==="
+            echo "========================================="
+
+            docker exec project07-php74 chown -R www-data:www-data \
+              /var/www/laravel/storage \
+              /var/www/laravel/bootstrap/cache
+
+            docker exec project07-php74 chmod -R 775 \
+              /var/www/laravel/storage \
+              /var/www/laravel/bootstrap/cache
+
+            echo "========================================="
+            echo "=== CLEAR LARAVEL CONFIG ==="
+            echo "========================================="
+
+            docker exec project07-php74 php \
+              /var/www/laravel/artisan config:clear
+
+            echo "========================================="
+            echo "=== TEST LARAVEL DATABASE CONNECTION ==="
+            echo "========================================="
+
+            docker exec project07-php74 php \
+              /var/www/laravel/artisan migrate:status
+
+            echo "========================================="
+            echo "=== RUN DATABASE MIGRATION ==="
+            echo "========================================="
+
+            docker exec project07-php74 php \
+              /var/www/laravel/artisan migrate --force
+
+            echo "========================================="
+            echo "=== CACHE LARAVEL CONFIG ==="
+            echo "========================================="
+
+            docker exec project07-php74 php \
+              /var/www/laravel/artisan config:cache
+
+            echo "========================================="
+            echo "=== LARAVEL VERSION ==="
+            echo "========================================="
+
+            docker exec project07-php74 php \
+              /var/www/laravel/artisan --version
+
+            echo "========================================="
+            echo "=== MIGRATION STATUS ==="
+            echo "========================================="
+
+            docker exec project07-php74 php \
+              /var/www/laravel/artisan migrate:status
+
+            echo "========================================="
+            echo "=== NGINX CONFIG TEST ==="
+            echo "========================================="
+
+            docker exec project07-nginx nginx -t
+
+            echo "========================================="
+            echo "=== DEPLOYMENT COMPLETED ==="
+            echo "========================================="
+
+            docker ps
+
+            docker image prune -af
