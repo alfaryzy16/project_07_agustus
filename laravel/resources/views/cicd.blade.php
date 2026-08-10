@@ -6,7 +6,7 @@
 </head>
 <body>
 
-    <h1>Berhasilllllll gagag</h1>
+    <h1>Git git berhasil</h1>
 
     <h2>Database Test</h2>
 
