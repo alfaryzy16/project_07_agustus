@@ -1,0 +1,54 @@
+---
+- name: Install Jenkins CI/CD
+  hosts: production
+  become: true
+
+  vars:
+    jenkins_path: /opt/jenkins
+
+  tasks:
+
+    - name: Create Jenkins directory
+      ansible.builtin.file:
+        path: "{{ jenkins_path }}"
+        state: directory
+        mode: "0755"
+
+    - name: Create Jenkins Dockerfile
+      ansible.builtin.copy:
+        src: ../jenkins/Dockerfile
+        dest: "{{ jenkins_path }}/Dockerfile"
+        mode: "0644"
+
+    - name: Create Jenkins Docker Compose
+      ansible.builtin.copy:
+        src: ../jenkins/docker-compose.yml
+        dest: "{{ jenkins_path }}/docker-compose.yml"
+        mode: "0644"
+
+    - name: Build Jenkins image
+      ansible.builtin.command:
+        cmd: docker compose build
+        chdir: "{{ jenkins_path }}"
+
+    - name: Start Jenkins
+      ansible.builtin.command:
+        cmd: docker compose up -d
+        chdir: "{{ jenkins_path }}"
+
+    - name: Wait for Jenkins
+      ansible.builtin.uri:
+        url: http://127.0.0.1:8085/login
+        status_code: 200
+      register: jenkins_status
+      retries: 30
+      delay: 5
+      until: jenkins_status.status == 200
+
+    - name: Show Jenkins container
+      ansible.builtin.command:
+        cmd: docker ps --filter name=project07-jenkins
+
+    - name: Show Jenkins logs
+      ansible.builtin.command:
+        cmd: docker logs --tail 20 project07-jenkins

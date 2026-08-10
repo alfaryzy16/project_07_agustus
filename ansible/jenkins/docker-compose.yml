@@ -1,0 +1,26 @@
+services:
+
+  jenkins:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    container_name: project07-jenkins
+    restart: unless-stopped
+
+    ports:
+      - "8085:8080"
+      - "50000:50000"
+
+    volumes:
+      - jenkins_home:/var/jenkins_home
+
+    networks:
+      - jenkins
+
+volumes:
+  jenkins_home:
+
+networks:
+  jenkins:
+    driver: bridge
